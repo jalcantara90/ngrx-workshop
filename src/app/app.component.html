@@ -2,9 +2,8 @@
 
   <nb-layout-header fixed style="justify-content: flex-end; height: 50px;">
     <header>
-
       <button
-        *ngIf="false"
+        *ngIf="!(isLoggedIn$ | async); else loggedUser"
         [routerLink]="['/auth/login']"
         nbButton
         outline
@@ -12,13 +11,6 @@
         status="basic">
         INICIAR SESSIÓN
       </button>
-
-      <nb-user
-        size="small"
-        name="Jonathan Alcántara"
-        title="Software Engineer"
-        [nbContextMenu]="contextualItems">
-      </nb-user>
     </header>
   </nb-layout-header>
 
@@ -27,8 +19,16 @@
     <router-outlet></router-outlet>
   </nb-layout-column>
 
-  <!-- <nb-layout-footer fixed>
-
-  </nb-layout-footer> -->
-
 </nb-layout>
+
+<ng-template #loggedUser>
+  <ng-container *ngIf="user$ | async as user">
+    <nb-user
+      size="small"
+      [name]="user.name"
+      title="Software Engineer"
+      [picture]="user.img"
+      [nbContextMenu]="contextualItems">
+    </nb-user>
+  </ng-container>
+</ng-template>

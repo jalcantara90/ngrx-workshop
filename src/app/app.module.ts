@@ -9,6 +9,10 @@ import { NbDialogModule, NbLayoutModule } from '@nebular/theme';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthModule } from './auth/auth.module';
+import { reducers } from './reducer';
+import { StoreRouterConnectingModule, RouterState } from '@ngrx/router-store';
 
 @NgModule({
   declarations: [
@@ -21,13 +25,15 @@ import { environment } from '../environments/environment';
     NebularModule,
     HttpClientModule,
     NbLayoutModule,
-    StoreModule.forRoot({}, { 
+    AuthModule.forRoot(),
+    StoreModule.forRoot(reducers, {
       runtimeChecks: {
         strictStateImmutability: true,
         strictActionImmutability: true,
       }
     }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
+    EffectsModule.forRoot([]),
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -25,6 +25,7 @@
     "@nebular/theme": "^5.1.0",
     "@ngrx/effects": "^9.2.0",
     "@ngrx/entity": "^9.2.0",
+    "@ngrx/router-store": "^9.2.0",
     "@ngrx/schematics": "^9.2.0",
     "@ngrx/store": "^9.2.0",
     "@ngrx/store-devtools": "^9.2.0",
