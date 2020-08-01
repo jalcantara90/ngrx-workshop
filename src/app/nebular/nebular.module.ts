@@ -12,6 +12,9 @@ import {
   NbSpinnerModule,
   NbDialogModule,
   NbCheckboxModule,
+  NbUserModule,
+  NbContextMenuModule,
+  NbMenuModule,
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
@@ -24,7 +27,9 @@ const modules = [
   NbIconModule,
   NbTabsetModule,
   NbSpinnerModule,
-  NbCheckboxModule
+  NbCheckboxModule,
+  NbUserModule,
+  NbContextMenuModule
 ];
 
 @NgModule({
@@ -32,6 +37,7 @@ const modules = [
   imports: [CommonModule,
     NbThemeModule.forRoot({ name: 'cosmic' }),
     NbDialogModule.forRoot(),
+    NbMenuModule.forRoot(),
     ...modules
   ],
   exports: [...modules],

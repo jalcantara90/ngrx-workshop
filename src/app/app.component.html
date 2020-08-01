@@ -2,7 +2,9 @@
 
   <nb-layout-header fixed style="justify-content: flex-end; height: 50px;">
     <header>
+
       <button
+        *ngIf="false"
         [routerLink]="['/auth/login']"
         nbButton
         outline
@@ -10,6 +12,13 @@
         status="basic">
         INICIAR SESSIÓN
       </button>
+
+      <nb-user
+        size="small"
+        name="Jonathan Alcántara"
+        title="Software Engineer"
+        [nbContextMenu]="contextualItems">
+      </nb-user>
     </header>
   </nb-layout-header>
 
