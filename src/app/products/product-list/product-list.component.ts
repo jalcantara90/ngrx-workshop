@@ -2,8 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { Observable } from 'rxjs';
 import { Product } from '../product.model';
-import { map } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { Store, select } from '@ngrx/store';
+import { ProductState } from '../product.reducer';
+import { getProducts, selectProductToUpdate, deleteProduct } from '../product.actions';
+import { isLoggedIn } from '../../auth/auth.selectors';
+import {
+  selectNewProducts,
+  selectRecommendedProducts,
+  loadingProducts,
+  selectNewAmount,
+} from '../product.selectors';
 
 @Component({
   selector: 'app-product-list',
@@ -15,32 +23,29 @@ export class ProductListComponent implements OnInit {
   newsProducts$: Observable<Product[]>;
   recommendedProducts$: Observable<Product[]>;
   loading$: Observable<boolean>;
+  newsAmount$: Observable<number>;
+  isUserLoggedIn$: Observable<boolean> = this.store.pipe(select(isLoggedIn));
 
   constructor(
     private productService: ProductService,
-    private router: Router
-  ) { }
+    private store: Store<ProductState>
+  ) {}
 
   ngOnInit(): void {
-    const products$ = this.productService.getAllProducts();
-    this.newsProducts$ = products$.pipe(
-      map(productList => productList.filter(product => product.isNew))
+    this.store.dispatch(getProducts());
+    this.newsProducts$ = this.store.pipe(select(selectNewProducts));
+    this.recommendedProducts$ = this.store.pipe(
+      select(selectRecommendedProducts)
     );
-    this.recommendedProducts$ = products$.pipe(
-      map(productList => productList.filter(product => product.isRecommended))
-    );
-
-    this.loading$ = products$.pipe(
-      map(productList => !!productList)
-    );
+    this.loading$ = this.store.pipe(select(loadingProducts));
+    this.newsAmount$ = this.store.pipe(select(selectNewAmount));
   }
 
-  deleteProduct(id: string) {
-    this.productService.deleteProduct(id).subscribe();
+  deleteProduct(productId: string) {
+    this.store.dispatch(deleteProduct({ productId }));
   }
 
   editProduct(product: Product) {
-    this.productService.productSelected = product;
-    this.router.navigateByUrl('/product-form');
+    this.store.dispatch(selectProductToUpdate({product}));
   }
 }

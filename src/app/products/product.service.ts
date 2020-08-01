@@ -30,7 +30,7 @@ export class ProductService {
   }
 
   deleteProduct(id: string) {
-    return this.http.delete(this.url + '/' + id);
+    return this.http.delete<{id: string}>(this.url + '/' + id);
   }
 
   set productSelected(product: Product) {

@@ -8,9 +8,9 @@ import { Product } from '../product.model';
 })
 export class ProductComponent {
   @Input() product: Product;
+  @Input() isUserLogged: boolean;
   @Output() editProduct: EventEmitter<Product> = new EventEmitter();
   @Output() deleteProduct: EventEmitter<string> = new EventEmitter();
 
   constructor() { }
-
 }

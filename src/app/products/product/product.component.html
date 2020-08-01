@@ -11,7 +11,7 @@
     </div>
     <div class="product-actions">
       <span>Precio: {{ product.price }} €</span>
-      <div class="actions">
+      <div class="actions" *ngIf="isUserLogged">
         <button nbButton ghost (click)="editProduct.emit(product)"><nb-icon icon="edit-outline"></nb-icon></button>
         <button nbButton ghost status="danger" (click)="deleteProduct.emit(product.id)"><nb-icon icon="trash-2-outline"></nb-icon></button>
       </div>
