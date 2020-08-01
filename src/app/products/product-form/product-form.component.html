@@ -1,0 +1,21 @@
+<div class="container">
+  <nb-card accent="danger">
+    <nb-card-body>
+      <h5>
+        Crear o editar producto
+      </h5>
+
+      <form [formGroup]="form">
+        <input type="text" formControlName="name" nbInput fullWidth status="basic" placeholder="Nombre producto">
+        <input type="text" formControlName="imgUrl" nbInput fullWidth status="basic" placeholder="Url de la imagen del producto">
+        <input type="number" formControlName="price" nbInput fullWidth status="basic" placeholder="Precio">
+        <nb-checkbox formControlName="isNew">¿Es un producto nuevo?</nb-checkbox>
+        <nb-checkbox formControlName="isRecommended">¿Recomiendas este producto?</nb-checkbox>
+      </form>
+      <div class="form-action">
+        <button nbButton size="small" outline status="danger" [routerLink]="['/']"> Cancelar </button>
+        <button nbButton size="small" (click)="saveProduct()" status="primary" > Crear producto </button>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>

@@ -1,0 +1,20 @@
+<nb-card>
+  <nb-card-header style="position: relative;">
+    <nb-badge *ngIf="product.isNew" text="Nuevo" status="danger" position="top right"></nb-badge>
+    {{ product.name }}
+  </nb-card-header>
+  <nb-card-body class="card-body">
+    <img [src]="product.imgUrl">
+
+    <div class="product-actions">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laudantium voluptas facilis neque quod explicabo aliquam quibusdam eaque!
+    </div>
+    <div class="product-actions">
+      <span>Precio: {{ product.price }} €</span>
+      <div class="actions">
+        <button nbButton ghost (click)="editProduct.emit(product)"><nb-icon icon="edit-outline"></nb-icon></button>
+        <button nbButton ghost status="danger" (click)="deleteProduct.emit(product.id)"><nb-icon icon="trash-2-outline"></nb-icon></button>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

@@ -1,0 +1,14 @@
+.card-body {
+  padding: 0 !important;
+
+  img {
+    width: 100%;
+  }
+
+  .product-actions {
+    padding: .5rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

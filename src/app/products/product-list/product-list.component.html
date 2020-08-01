@@ -1,0 +1,27 @@
+<section style="margin-top: 2em;">
+  <ng-container *ngIf="(loading$ | async); else loader">
+    <nb-tabset  style="padding: 1rem 0;">
+      <nb-tab tabTitle="Nuevos" badgeText="6" badgeStatus="success">
+        <app-product (deleteProduct)="deleteProduct($event)" (editProduct)="editProduct($event)" [product]="product" *ngFor="let product of newsProducts$ | async"></app-product>
+      </nb-tab>
+
+      <nb-tab tabTitle="Recomendados">
+        <app-product (deleteProduct)="deleteProduct($event)" (editProduct)="editProduct($event)" [product]="product" *ngFor="let product of recommendedProducts$ | async"></app-product>
+      </nb-tab>
+    </nb-tabset>
+  </ng-container>
+
+  <button
+    [routerLink]="['/product-form']"
+    nbButton shape="round" status="primary" hero>
+    <nb-icon icon="plus-outline"></nb-icon>
+  </button>
+</section>
+
+<ng-template #loader>
+  <nb-card [nbSpinner]="true" nbSpinnerStatus="danger">
+    <p></p>
+  </nb-card>
+</ng-template>
+
+

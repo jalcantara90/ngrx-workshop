@@ -1,0 +1,17 @@
+<div class="container">
+  <nb-card status="danger">
+    <nb-card-header>Inicio de sesión</nb-card-header>
+    <nb-card-body>
+      <form [formGroup]="form">
+        <input type="text" formControlName="email" nbInput fullWidth status="basic" placeholder="Email">
+        <input type="password" formControlName="password" nbInput fullWidth status="basic" placeholder="Contraseña">
+      </form>
+    </nb-card-body>
+    <nb-card-footer>
+      <div class="form-action">
+        <button nbButton size="small" outline status="danger" [routerLink]="['/']"> Volver </button>
+        <button nbButton size="small" status="primary" (click)="login()"> INICIAR SESSIÓN </button>
+      </div>
+    </nb-card-footer>
+  </nb-card>
+</div>

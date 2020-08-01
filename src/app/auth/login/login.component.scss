@@ -1,8 +1,10 @@
-header {
+input {
+  margin-bottom: 15px;
+}
+
+.form-action {
   width: 100%;
   display: flex;
   justify-content: flex-end;
-}
-:host nb-layout-header nav {
-  height: 50px;
+  gap: 1.5em;
 }
