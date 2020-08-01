@@ -1,27 +1,33 @@
 # NgrxWorkshop
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.3.
+This Repo has several branches, if you want start from the starting point use master.
 
-## Development server
+## 1 Installing NgRx dependencies
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+> npm install @ngrx/{store,effects,entity,store-devtools} --save
 
-## Code scaffolding
+If You want to make you life easier when are you working with NgRx install de schematics
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+> ng add @ngrx/schematics
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## 2 Create the Basic boilerplate of NgRx Store
 
-## Running unit tests
+> ng generate @ngrx/schematics:store --name=store --project=ngrx-workshop --module=app.module.ts --minimal --root
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+This should update the app.module to add basic configuration
 
-## Running end-to-end tests
+```typescript
+  StoreModule.forRoot({}, {
+    runtimeChecks: {
+      strictStateImmutability: true,
+      strictActionImmutability: true,
+    }
+  }),
+  !environment.production ? StoreDevtoolsModule.instrument() : [],
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+With this you can create the most basic configuration of NgRx store, but if you need an initial reducer you can run
 
-## Further help
+> ng generate @ngrx/schematics:store --name=store --project=ngrx-workshop --module=app.module.ts --root
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

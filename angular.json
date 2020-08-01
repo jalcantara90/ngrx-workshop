@@ -127,6 +127,7 @@
   },
   "defaultProject": "ngrx-workshop",
   "cli": {
-    "analytics": "214ea981-f028-41e1-beb2-5fdc64dcd4dd"
+    "defaultCollection": "@ngrx/schematics",
+    "analytics": "230376f3-8ab4-4f86-a4bf-40b97c50d05e"
   }
 }
