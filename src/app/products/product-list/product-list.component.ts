@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../product.service';
 import { Observable } from 'rxjs';
 import { Product } from '../product.model';
 import { Store, select } from '@ngrx/store';
@@ -19,33 +18,23 @@ import {
   styleUrls: ['./product-list.component.scss'],
 })
 export class ProductListComponent implements OnInit {
-  products$: Observable<Product[]>;
-  newsProducts$: Observable<Product[]>;
-  recommendedProducts$: Observable<Product[]>;
-  loading$: Observable<boolean>;
-  newsAmount$: Observable<number>;
+  newsProducts$: Observable<Product[]> = this.store.pipe(select(selectNewProducts));;
+  recommendedProducts$: Observable<Product[]> = this.store.pipe(select(selectRecommendedProducts));
+  loading$: Observable<boolean> = this.store.pipe(select(loadingProducts));
+  newsAmount$: Observable<number> = this.store.pipe(select(selectNewAmount));
   isUserLoggedIn$: Observable<boolean> = this.store.pipe(select(isLoggedIn));
 
-  constructor(
-    private productService: ProductService,
-    private store: Store<ProductState>
-  ) {}
+  constructor(private store: Store<ProductState>) {}
 
   ngOnInit(): void {
     this.store.dispatch(getProducts());
-    this.newsProducts$ = this.store.pipe(select(selectNewProducts));
-    this.recommendedProducts$ = this.store.pipe(
-      select(selectRecommendedProducts)
-    );
-    this.loading$ = this.store.pipe(select(loadingProducts));
-    this.newsAmount$ = this.store.pipe(select(selectNewAmount));
   }
 
-  deleteProduct(productId: string) {
+  deleteProduct(productId: string): void {
     this.store.dispatch(deleteProduct({ productId }));
   }
 
-  editProduct(product: Product) {
+  editProduct(product: Product): void {
     this.store.dispatch(selectProductToUpdate({product}));
   }
 }
